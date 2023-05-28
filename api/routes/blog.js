@@ -17,23 +17,42 @@ BlogRouter.get("/", async (req, res) => {
         })
         .catch(err => {
             // console.log(err);
-            response(res, 400, { error: err })
+            response(res, 400, { error: error })
         })
 })
 BlogRouter.post("/create", getAuth, async (req, res) => {
     try {
         const { title, content, image } = req.body
         if (title && content) {
-            const blog =new Blog({
-                title,content,image,user:req.userId
+            const blog = new Blog({
+                title, content, image, user: req.userId
             })
             await blog.save()
             // console.log(title, image, content, req.auth);
-            response(res, 200, { msg: "blog created", blog:blog })
+            response(res, 200, { msg: "blog created", blog: blog })
         }
     } catch (error) {
-
+        response(res, 400, { error: error })
     }
+})
+
+BlogRouter.delete("/delete", getAuth, async (req, res) => {
+    try {
+        const blog = await Blog.findOneAndDelete({ user: req.userId, _id: req.body.id })
+        if (!blog) {
+            response(res, 404, { error: "blog not found" })
+        }
+        response(res, 200, { msg: "blog deleted!" })
+    } catch (error) {
+        response(res, 400, { error: error })
+    }
+})
+
+BlogRouter.put("/update", getAuth, async (req, res) => {
+    const {title,content,image,id}=req.body;
+    await Blog.findOneAndUpdate({user:req.userId , _id:id},{title,content,image})
+    .then((result)=>response(res,200,{msg:"blog updated",blog:result}))
+    .catch(err=>response(res,400,err))
 })
 
 export default BlogRouter;
