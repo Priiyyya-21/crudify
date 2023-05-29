@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import PostCard from "../components/PostCard";
 
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+    <div>
+      <PostCard />
+    </div>
+  );
+};
 
-export default Home
+export default Home;
