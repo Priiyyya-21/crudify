@@ -4,19 +4,16 @@ import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import Actions from './Actions';
 
 
 export default function PostCard(props) {
  const{user,id,title,content,image,timestamp} =props.post;
 
   return (
-    <Card sx={{ width: "100" }} id={id}>
+    <Card sx={{ width: "100%", boxShadow:"0 0  15px rgb(0,0,0,0.2)",borderRadius:"10px" }} id={id}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -24,9 +21,7 @@ export default function PostCard(props) {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <Actions id={id}/>
         }
         title={title}
         subheader={timestamp}

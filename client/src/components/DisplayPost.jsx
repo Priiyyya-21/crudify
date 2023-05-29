@@ -5,6 +5,7 @@ import PostCard from "./PostCard";
 const DisplayPost = () => {
   const posts = [
     {
+      id:"1",
       title: "this is title1",
       content: "this is content1",
       image:
@@ -13,6 +14,7 @@ const DisplayPost = () => {
       timestamp: "2 days ago",
     },
     {
+      id:"2",
       title: "this is title2",
       content: "this is content2",
       image:
@@ -25,11 +27,12 @@ const DisplayPost = () => {
   return (
     <Box
       sx={{
-        maxWidth: "500px",
+        maxWidth: "600px",
         display: "flex",
         flexDirection: "column",
         margin: "auto",
         gap: 3,
+        py:2
       }}
     >
       {posts.map((post, index) => (
