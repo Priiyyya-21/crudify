@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -7,22 +7,28 @@ import Navbar from "./components/Navbar";
 import { Container } from "@mui/material";
 import CreatePost from "./pages/CreatePost";
 
+export const AuthContext = createContext();
+
+
 const App = () => {
+  const [auth, setAuth] = useState(null);
+
+
   return (
-    <div>
+    <AuthContext.Provider value={{auth,setAuth}}>
       <BrowserRouter>
         <Navbar />
 
         <Container sx={{ p: 1, mt: 10 }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/CreatePost" element={<CreatePost/>} />
+            <Route path="/CreatePost" element={<CreatePost />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Register" element={<Register />} />
           </Routes>
         </Container>
       </BrowserRouter>
-    </div>
+      </AuthContext.Provider>
   );
 };
 
