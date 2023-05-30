@@ -42,6 +42,19 @@ const Navbar = () => {
                   Home{" "}
                 </Link>{" "}
               </Button>
+
+              <Button>
+                {" "}
+                <Link
+                  style={{ color: "#fff", textDecoration: "none" }}
+                  to={"/CreatePost"}
+                >
+                  {" "}
+                  Create Blog{" "}
+                </Link>{" "}
+              </Button>
+
+
               <Button>
                 {" "}
                 <Link
