@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Card,
   CardContent,
@@ -7,10 +7,12 @@ import {
   Button,
 } from "@mui/material";
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from "../App";
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" })
   const navigator = useNavigate()
+  const {setRefresh}=useContext(AuthContext)
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -31,6 +33,7 @@ const Login = () => {
     const data = await res.json()
     if (res.ok) {
       localStorage.setItem("token",data.token);
+      setRefresh(true)
       navigator("/");
     } else {
       console.log(data);

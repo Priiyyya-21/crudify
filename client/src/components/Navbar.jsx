@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppBar, Box, Button, IconButton, Toolbar, useMediaQuery, } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { } from "@mui/icons-material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import Menu from "@mui/material/Menu";
@@ -9,7 +9,9 @@ import { AuthContext } from '../App';
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth, setAuth,refresh,setRefresh } = useContext(AuthContext);
+  const navigator = useNavigate()
+  
 
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -31,14 +33,20 @@ const Navbar = () => {
       const data = await res.json()
       if (res.ok) {
         setAuth(data)
-      }else{
+        setRefresh(false)
+      } else {
         setAuth(null)
       }
     }
     fetchUser()
-  }, [auth])
+  }, [auth,refresh])
 
 
+  const logOut = () => {
+    localStorage.removeItem("token")
+    setRefresh(true)
+    navigator("/login")
+  }
   return (
     <AppBar sx={{ p: "0 5%" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
@@ -46,11 +54,12 @@ const Navbar = () => {
         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
           {isNonMobileDevice ?
             <>
-               {auth ?
+              {auth ?
                 <>
                   <Button><Link style={{ color: "#fff", textDecoration: "none" }} to={"/"}>Home</Link></Button>
                   <Button><Link style={{ color: "#fff", textDecoration: "none" }} to={"/CreatePost"}>Create Blog</Link></Button>
-                 
+                  <Button color='inherit' onClick={logOut}>Logout</Button>
+
                 </>
                 :
                 <>
@@ -81,10 +90,17 @@ const Navbar = () => {
                   "aria-labelledby": "basic-button",
                 }}
               >
-                <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/"}>Home</Link></MenuItem>,
-                <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/CreatePost"}>Create Blog</Link></MenuItem>,
-                <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/Login"}>Login</Link></MenuItem>,
-                <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/Register"}>Register</Link></MenuItem>
+                {auth ? [
+                  <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/"}>Home</Link></MenuItem>,
+                  <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/create"}>Create</Link></MenuItem>,
+                  <MenuItem onClick={() => {handleClose(); logOut()}}>Logout</MenuItem>,
+
+                ] 
+                  :
+                  [
+                    <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/login"}>Login</Link></MenuItem>,
+                    <MenuItem onClick={handleClose}><Link style={{ color: "#333", textDecoration: "none" }} to={"/register"}>Register</Link></MenuItem>
+                  ]}
               </Menu>
             </>
           }

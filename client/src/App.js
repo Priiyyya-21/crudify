@@ -11,11 +11,12 @@ export const AuthContext = createContext();
 
 
 const App = () => {
+  const [refresh,setRefresh]= useState(false);
   const [auth, setAuth] = useState(null);
 
 
   return (
-    <AuthContext.Provider value={{auth,setAuth}}>
+    <AuthContext.Provider value={{auth,setAuth,refresh,setRefresh}}>
       <BrowserRouter>
         <Navbar />
 
