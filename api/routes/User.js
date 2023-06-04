@@ -2,7 +2,10 @@ import express from "express";
 import User from "../models/UserSchema.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+import getAuth from "../middleware/auth.js"
+import dotenv from "dotenv"
 
+dotenv.config()
 
 const UserRouter = express.Router();
 UserRouter.use(express.json())
@@ -52,6 +55,9 @@ UserRouter.post("/login", async (req, res)=>{
   }
 })
 
+UserRouter.get("/auth", getAuth,(req,res)=>{
+  res.status(200).json(req.auth)
+})
 
 
 export default UserRouter;
