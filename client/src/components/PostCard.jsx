@@ -10,10 +10,10 @@ import Actions from './Actions';
 import moment from "moment";
 
 export default function PostCard(props) {
- const{user,id,title,content,image,createdOn} =props.post;
+ const{user,_id,title,content,image,createdOn} =props.post;
 
   return (
-    <Card sx={{ width: "100%", boxShadow:"0 0  15px rgb(0,0,0,0.2)",borderRadius:"10px" }} id={id}>
+    <Card sx={{ width: "100%", boxShadow:"0 0  15px rgb(0,0,0,0.2)",borderRadius:"10px" }} id={_id}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -21,7 +21,7 @@ export default function PostCard(props) {
           </Avatar>
         }
         action={
-          <Actions id={id}/>
+          <Actions id={_id}/>
         }
         title={title}
         subheader={moment(createdOn).fromNow()}
