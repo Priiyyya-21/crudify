@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-
 import { Card, CardContent, Typography, TextField, SpeedDial, SpeedDialIcon } from "@mui/material"
+import { useNavigate } from 'react-router-dom'
+
 
 const CreatePost = () => {
-   
+
     const [blog, setBlog] = useState({ title: "", content: "", image: "" })
+    const navigator = useNavigate()
 
     const handleChange = (e) => {
         const name = e.target.name;
@@ -14,24 +16,25 @@ const CreatePost = () => {
 
     const handleSubmit = async () => {
         console.log(blog);
+        // }
+        const res = await fetch("http://localhost:7000/api/blog/create", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                token: localStorage.getItem("token")
+            },
+            body: JSON.stringify(blog)
+        })
+        const data = await res.json()
+        if (res.ok) {
+            console.log(data);
+            alert("blog created")
+            navigator("/");
+            setBlog({ title: "", content: "", image: "" })
+        } else {
+            console.log(data);
+        }
     }
-    //     const res = await fetch("http://localhost:7000/api/blog/create", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             token: localStorage.getItem("token")
-    //         },
-    //         body: JSON.stringify(blog)
-    //     })
-    //     const data = await res.json()
-    //     if(res.ok){
-    //         console.log(data);
-    //         alert("blog created")
-    //         setBlog({title: "", content: "", image: ""})
-    //     }else{
-    //         console.log(data);
-    //     }
-    // }
 
 
     return (
@@ -42,6 +45,7 @@ const CreatePost = () => {
                 </Typography>
             </CardContent>
             <TextField id="outlined-basic" label="title" variant="outlined" name='title' onChange={handleChange} value={blog.title} />
+            <TextField id="outlined-basic" label="imageURL" variant="outlined" name='image' onChange={handleChange} value={blog.image} />
             <TextField id="outlined-basic" label="content" variant="outlined" name='content' rows={7} onChange={handleChange} value={blog.content} multiline />
             <SpeedDial
                 ariaLabel="SpeedDial basic example"
