@@ -1,18 +1,12 @@
-import React, { useContext, useState } from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  TextField,
-  Button,
-} from "@mui/material";
+import React, { useContext, useState } from 'react'
+import { Card, CardContent, Typography, TextField, Button } from "@mui/material"
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from "../App";
+import { AuthContext } from '../App'
 
 const Login = () => {
   const [user, setUser] = useState({ email: "", password: "" })
   const navigator = useNavigate()
-  const {setRefresh}=useContext(AuthContext)
+  const {setRefresh} = useContext(AuthContext);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -22,20 +16,19 @@ const Login = () => {
 
   const handleSubmit = async () => {
     console.log(user);
-    const res = await fetch("http://localhost:7000/api/User/login", {
-
+    const res = await fetch("http://localhost:7000/api/user/login", {
       method: "POST",
-      headers: {
+      headers:{
         "Content-Type": "application/json"
       },
       body: JSON.stringify(user)
     })
     const data = await res.json()
-    if (res.ok) {
-      localStorage.setItem("token",data.token);
+    if(res.ok){
+      localStorage.setItem("token", data.token);
       setRefresh(true)
       navigator("/");
-    } else {
+    }else{
       console.log(data);
     }
   }
@@ -52,6 +45,6 @@ const Login = () => {
       <Button variant='contained' onClick={handleSubmit}>Login</Button>
     </Card>
   )
-};
+}
 
-export default Login;
+export default Login

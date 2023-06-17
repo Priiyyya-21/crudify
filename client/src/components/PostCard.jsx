@@ -8,12 +8,13 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import Actions from './Actions';
 import moment from "moment";
+import { AuthContext } from '../App';
 
 export default function PostCard(props) {
- const{user,_id,title,content,image,createdOn} =props.post;
-
+  const {user, _id, title, content, image, createdOn} = props.post;
+  const {auth} = React.useContext(AuthContext)
   return (
-    <Card sx={{ width: "100%", boxShadow:"0 0  15px rgb(0,0,0,0.2)",borderRadius:"10px" }} id={_id}>
+    <Card sx={{ width: "100%", boxShadow: "0 0 15px rgb(0, 0, 0, 0.2)", borderRadius: "4px" }} id={_id}>
       <CardHeader
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
@@ -21,7 +22,7 @@ export default function PostCard(props) {
           </Avatar>
         }
         action={
-          <Actions id={_id}/>
+          auth._id === user._id && <Actions id={_id}/>
         }
         title={title}
         subheader={moment(createdOn).fromNow()}
@@ -37,7 +38,6 @@ export default function PostCard(props) {
           {content}
         </Typography>
       </CardContent>
-      
     </Card>
   );
 }

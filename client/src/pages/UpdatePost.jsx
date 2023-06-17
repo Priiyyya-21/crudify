@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Card, CardContent, Typography, TextField, Box, Button, SpeedDial } from "@mui/material"
-import { Add } from "@mui/icons-material"
+// import { Add } from "@mui/icons-material"
 import { useNavigate, useParams } from 'react-router-dom'
 //upload image
 const UpdatePost = () => {
@@ -64,20 +64,19 @@ const UpdatePost = () => {
 
       <Box sx={{ textAlign: "center" }}>
 
-        <SpeedDial
+        {/* <SpeedDial
           ariaLabel="SpeedDial basic example"
           onClick={handleSubmit}
           icon={<Add />}>
 
-        </SpeedDial>
-        {/* <Button variant="contained" disableElevation onClick={handleSubmit}>
+        </SpeedDial> */}
+        <Button variant="contained" disableElevation onClick={handleSubmit}>
           Update
 
-        </Button> */}
+        </Button>
       </Box>
     </Card>
   )
 }
 
 export default UpdatePost
-
