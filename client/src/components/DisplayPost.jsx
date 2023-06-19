@@ -6,8 +6,10 @@ import PostCard from './PostCard'
 const DisplayPost = () => {
     const [posts, setPosts] = useState([])
     
+    
     useEffect(()=>{
         const fetchData = async () => {
+         
             const res = await fetch("http://localhost:7000/api/blog/", {
                 method: "GET",
                 headers: {

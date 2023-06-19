@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState,useEffect } from 'react'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,10 +9,27 @@ import { red } from '@mui/material/colors';
 import Actions from './Actions';
 import moment from "moment";
 import { AuthContext } from '../App';
+import axios from 'axios';
 
 export default function PostCard(props) {
   const {user, _id, title, content, image, createdOn} = props.post;
   const {auth} = React.useContext(AuthContext)
+  //for image
+  const [imageData, setImageData] = useState('');
+
+
+  useEffect(() => {
+    // Fetch the image data from the API endpoint
+    axios.get('http://localhost:7000/public/images/')
+      .then(response => {
+        setImageData(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching image:', error);
+      });
+  }, []);
+
+
   return (
     <Card sx={{ width: "100%", boxShadow: "0 0 15px rgb(0, 0, 0, 0.2)", borderRadius: "4px" }} id={_id}>
       <CardHeader
@@ -30,12 +47,19 @@ export default function PostCard(props) {
       <CardMedia
         component="img"
         height="100%"
+        // src={imageData}
+        src={"http://localhost:7000/public/images/"}
         image={image}
-        alt={user}
+        
+        // alt={user}
+        title="picture"
       />
+      {/* <img src={imageData} alt="" /> */}
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          {content}
+          {/* {content} */}
+          {/* {imageData} */}
+          {image}
         </Typography>
       </CardContent>
     </Card>

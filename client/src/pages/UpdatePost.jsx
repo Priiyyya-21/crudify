@@ -64,12 +64,7 @@ const UpdatePost = () => {
 
       <Box sx={{ textAlign: "center" }}>
 
-        {/* <SpeedDial
-          ariaLabel="SpeedDial basic example"
-          onClick={handleSubmit}
-          icon={<Add />}>
-
-        </SpeedDial> */}
+        
         <Button variant="contained" disableElevation onClick={handleSubmit}>
           Update
 
