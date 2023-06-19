@@ -13,12 +13,16 @@ const getAuth=async(req,res,next)=>{
         }
         const verifyToken = jwt.verify(token , process.env.SECRET)
         //     console.log(verifyToken);
+        if(!verifyToken){
+            return res.status(401).json({error: "unauthorized"})
+        }
         const auth=await User.findById(verifyToken.id)
 
         req.userId=verifyToken.id
         req.auth=auth
         next()
     } catch (error) {
+        console.log(error.message);
         res.status(401).json({error:"unauthorized"})
     }
 }

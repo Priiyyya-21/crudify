@@ -9,8 +9,13 @@ dotenv.config();
 const port = process.env.PORT;
 const app = express();
 
+
 app.use(express.json());
 app.use(cors({ credentials: true }));
+
+
+
+app.use('/public',express.static('public'))
 
 // Using user route
 app.use("/api/user", UserRouter);
