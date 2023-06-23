@@ -31,7 +31,7 @@ export default function Actions({ id }) {
         })
         const data = await res.json();
         if(res.ok){
-            alert("Deleted successfully ! ")
+            alert("blog deleted")
         }else{
             console.log(data);
         }

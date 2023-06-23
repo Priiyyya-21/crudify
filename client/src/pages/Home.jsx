@@ -1,12 +1,12 @@
-import React from "react";
-import DisplayPost from "../components/DisplayPost";
+import React from 'react'
+import DisplayPost from '../components/DisplayPost'
 
 const Home = () => {
   return (
     <div>
-     <DisplayPost/>
+      <DisplayPost/>
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
