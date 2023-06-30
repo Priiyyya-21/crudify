@@ -5,8 +5,7 @@ import {
   Typography,
   TextField,
   Box,
-  SpeedDial,
-  SpeedDialIcon,
+  Button
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { useNavigate, useParams } from "react-router-dom";
@@ -98,8 +97,8 @@ const UpdatePost = () => {
       const data = await res.json();
       if (res.ok) {
         console.log(data);
-        alert("Blog updated");
-        navigate("/"); // Navigate to the home page or any other desired location
+        alert(" UPDATED successfully !!");
+        navigate("/"); 
       } else {
         console.log(data);
       }
@@ -124,7 +123,7 @@ const UpdatePost = () => {
     >
       <CardContent sx={{ m: 0 }}>
         <Typography gutterBottom variant="h4" component="div" sx={{ m: 0 }}>
-          Update Blog!
+          UPDATE post 
         </Typography>
       </CardContent>
       <TextField
@@ -148,11 +147,10 @@ const UpdatePost = () => {
       />
 
       <Box sx={{ textAlign: "center" }}>
-        <SpeedDial
-          ariaLabel="SpeedDial basic example"
-          onClick={handleSubmit}
-          icon={<Add />}
-        />
+      <Button variant="contained" disableElevation onClick={handleSubmit}>
+         UPDATE
+
+        </Button>
       </Box>
     </Card>
   );

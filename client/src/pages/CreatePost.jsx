@@ -4,8 +4,7 @@ import {
   CardContent,
   Typography,
   TextField,
-  SpeedDial,
-  SpeedDialIcon,
+ Button
 } from "@mui/material";
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
@@ -51,7 +50,7 @@ const CreatePost = () => {
       await fileRef.put(blog.image);
 
       const imageUrl = await fileRef.getDownloadURL();
-      console.log("Image uploaded successfully. Image URL:", imageUrl);
+      console.log("IMAGE uploaded successfully. Image URL:", imageUrl);
 
       const blogData = {
         title: blog.title,
@@ -71,7 +70,7 @@ const CreatePost = () => {
       const data = await res.json();
       if (res.ok) {
         console.log(data);
-        alert("Blog created");
+        alert(" post CREATED successfully !");
         setBlog({ title: "", content: "", image: null });
       } else {
         console.log(data);
@@ -97,7 +96,7 @@ const CreatePost = () => {
     >
       <CardContent sx={{ m: 0 }}>
         <Typography gutterBottom variant="h4" component="div" sx={{ m: 0 }}>
-          Write Blog!
+         CREATE your post
         </Typography>
       </CardContent>
       <TextField
@@ -119,11 +118,10 @@ const CreatePost = () => {
         value={blog.content}
         multiline
       />
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        icon={<SpeedDialIcon />}
-        onClick={handleSubmit}
-      />
+     <Button variant="contained" disableElevation  onClick={handleSubmit}>
+               CREATE
+
+            </Button>
     </Card>
   );
 };

@@ -48,7 +48,7 @@ const Navbar = () => {
   return (
     <AppBar sx={{ p: "0 5%" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <h3>Blogs</h3>
+        <h3>CRUDify</h3>
         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
           {isNonMobileDevice ?
             <>

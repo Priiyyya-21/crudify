@@ -31,7 +31,7 @@ export default function Actions({ id }) {
         })
         const data = await res.json();
         if(res.ok){
-            alert("blog deleted")
+            alert(" DELETED successfully !")
         }else{
             console.log(data);
         }
@@ -61,13 +61,13 @@ export default function Actions({ id }) {
                     handleClose()
                     handleUpdate()
                 }}>
-                    Update
+                    UPDATE
                 </MenuItem>
                 <MenuItem onClick={() => {
                     handleClose()
                     handleDelete()
                 }}>
-                    Delete
+                    DELETE
                 </MenuItem>
             </Menu>
         </div>
