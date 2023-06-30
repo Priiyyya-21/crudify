@@ -6,6 +6,8 @@ import {
   TextField,
  Button
 } from "@mui/material";
+import { useNavigate } from 'react-router-dom'
+
 import firebase from "firebase/compat/app";
 import "firebase/compat/storage";
 
@@ -24,7 +26,7 @@ firebase.initializeApp(firebaseConfig);
 
 const CreatePost = () => {
   const [blog, setBlog] = useState({ title: "", content: "", image: null });
-
+  const navigator = useNavigate()
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -72,6 +74,7 @@ const CreatePost = () => {
         console.log(data);
         alert(" post CREATED successfully !");
         setBlog({ title: "", content: "", image: null });
+        navigator("/");
       } else {
         console.log(data);
       }
