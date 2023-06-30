@@ -48,7 +48,8 @@ const Navbar = () => {
   return (
     <AppBar sx={{ p: "0 5%" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <h3>CRUDify</h3>
+        <h3><Link style={{ color: "#fff", textDecoration: "none" }} to={"/"}>CRUDify</Link></h3>
+
         <Box sx={{ display: "flex", alignItems: "center", gap: 3 }}>
           {isNonMobileDevice ?
             <>
